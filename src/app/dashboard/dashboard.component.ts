@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
 
   startSocketConnection() {
     this.socketService.connect(); // Start socket connection
+    this.socketService.getMessage().subscribe((res)=>{
+      console.log(res);
+    });
   }
 
   stopSocketConnection() {

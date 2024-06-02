@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { Socket, SocketIoConfig } from 'ngx-socket-io';
 import { AuthService } from '../auth/auth.service'; // Your authentication service
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class SocketService {
       this.socket.disconnect(); // Disconnect socket
       this.isConnected = false;
     }
+  }
+
+  getMessage() {
+    return this.socket.fromEvent('message').pipe(map((data:any) => data));
   }
 }
